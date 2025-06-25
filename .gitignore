@@ -39,3 +39,7 @@ yarn-error.log*
 
 # Filesort
 .filesort
+
+# Sql files
+*.sql
+*.sqlite

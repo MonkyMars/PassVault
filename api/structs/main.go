@@ -11,5 +11,5 @@ type Credential struct {
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 	Description string    `json:"description"`
-	Tags        string    `json:"tags"` // JSON string for database storage
+	Tags        []string  `json:"tags"`
 }
