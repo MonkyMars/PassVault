@@ -18,13 +18,12 @@ func GetCredential(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize database connection
-	database, err := db.Init()
-	if err != nil {
-		http.Error(w, "Database connection failed: "+err.Error(), http.StatusInternalServerError)
+	// Get the global database connection
+	database := db.GetDB()
+	if database == nil {
+		http.Error(w, "Database not initialized", http.StatusInternalServerError)
 		return
 	}
-	defer database.Close()
 
 	// Get credential from database
 	credential, err := db.GetCredential(database, id)
@@ -40,13 +39,12 @@ func GetCredential(w http.ResponseWriter, r *http.Request) {
 
 // GetAllCredentials retrieves all credentials
 func GetAllCredentials(w http.ResponseWriter, r *http.Request) {
-	// Initialize database connection
-	database, err := db.Init()
-	if err != nil {
-		http.Error(w, "Database connection failed: "+err.Error(), http.StatusInternalServerError)
+	// Get the global database connection
+	database := db.GetDB()
+	if database == nil {
+		http.Error(w, "Database not initialized", http.StatusInternalServerError)
 		return
 	}
-	defer database.Close()
 
 	// Get all credentials from database
 	credentials, err := db.GetAllCredentials(database)
@@ -69,13 +67,12 @@ func DeleteCredential(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize database connection
-	database, err := db.Init()
-	if err != nil {
-		http.Error(w, "Database connection failed: "+err.Error(), http.StatusInternalServerError)
+	// Get the global database connection
+	database := db.GetDB()
+	if database == nil {
+		http.Error(w, "Database not initialized", http.StatusInternalServerError)
 		return
 	}
-	defer database.Close()
 
 	// Delete credential from database
 	if err := db.DeleteCredential(database, id); err != nil {

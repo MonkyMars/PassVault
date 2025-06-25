@@ -43,3 +43,19 @@ yarn-error.log*
 # Sql files
 *.sql
 *.sqlite
+
+# Build directories
+build/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Binaries
+./*
+
+# Generated UI files for embedding
+api/static/

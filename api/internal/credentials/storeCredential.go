@@ -22,13 +22,12 @@ func StoreCredential(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Initialize database connection
-	database, err := db.Init()
-	if err != nil {
-		http.Error(w, "Database connection failed: "+err.Error(), http.StatusInternalServerError)
+	// Get the global database connection
+	database := db.GetDB()
+	if database == nil {
+		http.Error(w, "Database not initialized", http.StatusInternalServerError)
 		return
 	}
-	defer database.Close()
 
 	// Insert data into the database
 	if err := db.InsertCredential(database, credential); err != nil {
