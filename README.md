@@ -1,9 +1,11 @@
 # PassVault API Documentation
 
 ## Overview
+
 PassVault is a secure credential management API built with Go and Chi router.
 
 ## Base URL
+
 ```
 http://localhost:8200/api/v1
 ```
@@ -11,9 +13,10 @@ http://localhost:8200/api/v1
 ## Endpoints
 
 ### Health Check
+
 - **GET** `/health`
 - **Description**: Check if the API is running
-- **Response**: 
+- **Response**:
   ```json
   {
     "status": "ok",
@@ -24,6 +27,7 @@ http://localhost:8200/api/v1
 ### Credentials
 
 #### Create Credential
+
 - **POST** `/api/v1/credentials`
 - **Description**: Store a new credential
 - **Request Body**:
@@ -35,7 +39,7 @@ http://localhost:8200/api/v1
     "tags": "[]"
   }
   ```
-- **Response**: 
+- **Response**:
   ```json
   {
     "message": "Credential stored successfully"
@@ -43,9 +47,10 @@ http://localhost:8200/api/v1
   ```
 
 #### Get All Credentials
+
 - **GET** `/api/v1/credentials`
 - **Description**: Retrieve all stored credentials
-- **Response**: 
+- **Response**:
   ```json
   [
     {
@@ -61,18 +66,20 @@ http://localhost:8200/api/v1
   ```
 
 #### Get Single Credential
+
 - **GET** `/api/v1/credentials/{id}`
 - **Description**: Retrieve a specific credential by ID
-- **Parameters**: 
+- **Parameters**:
   - `id` (path): Credential ID
 - **Response**: Same as individual credential object above
 
 #### Delete Credential
+
 - **DELETE** `/api/v1/credentials/{id}`
 - **Description**: Delete a credential by ID
-- **Parameters**: 
+- **Parameters**:
   - `id` (path): Credential ID
-- **Response**: 
+- **Response**:
   ```json
   {
     "message": "Credential deleted successfully"
@@ -82,24 +89,26 @@ http://localhost:8200/api/v1
 ## Validation Rules
 
 ### Username
+
 - Minimum length: 3 characters
 - Maximum length: 32 characters
 
 ### Password
+
 - Minimum length: 8 characters
 - Maximum length: 64 characters
 
 ## Environment Variables
 
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `PORT` | `8200` | Server port |
-| `DATABASE_PATH` | `./credentials.sqlite` | SQLite database file path |
-| `REQUEST_TIMEOUT` | `20s` | HTTP request timeout |
-| `PASSWORD_MIN_LENGTH` | `8` | Minimum password length |
-| `PASSWORD_MAX_LENGTH` | `64` | Maximum password length |
-| `USERNAME_MIN_LENGTH` | `3` | Minimum username length |
-| `USERNAME_MAX_LENGTH` | `32` | Maximum username length |
+| Variable              | Default                | Description               |
+| --------------------- | ---------------------- | ------------------------- |
+| `PORT`                | `8200`                 | Server port               |
+| `DATABASE_PATH`       | `./credentials.sqlite` | SQLite database file path |
+| `REQUEST_TIMEOUT`     | `20s`                  | HTTP request timeout      |
+| `PASSWORD_MIN_LENGTH` | `8`                    | Minimum password length   |
+| `PASSWORD_MAX_LENGTH` | `64`                   | Maximum password length   |
+| `USERNAME_MIN_LENGTH` | `3`                    | Minimum username length   |
+| `USERNAME_MAX_LENGTH` | `32`                   | Maximum username length   |
 
 ## Error Responses
 
@@ -112,6 +121,7 @@ All errors return appropriate HTTP status codes with JSON error messages:
 ```
 
 Common status codes:
+
 - `400`: Bad Request (validation errors)
 - `404`: Not Found (credential not found)
 - `500`: Internal Server Error (database errors)
@@ -124,12 +134,3 @@ Common status codes:
 4. Set environment variables (optional)
 5. Run `go run main.go`
 6. The API will be available at `http://localhost:8200`
-
-## Security Note
-
-⚠️ **This is a development version**. In production:
-- Implement proper authentication and authorization
-- Encrypt passwords before storing
-- Use HTTPS
-- Add rate limiting
-- Implement proper logging and monitoring
