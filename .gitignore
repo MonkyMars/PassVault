@@ -54,8 +54,5 @@ build/
 # Logs
 *.log
 
-# Binaries
-./*
-
 # Generated UI files for embedding
 api/static/
